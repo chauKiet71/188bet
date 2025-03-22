@@ -1,0 +1,3 @@
+jQuery(document).ready(function($){$(".banners-top-wrapper").flickity({"cellAlign":"center","imagesLoaded":!0,"lazyLoad":1,"freeScroll":!1,"wrapAround":!0,"autoPlay":3000,"pauseAutoPlayOnHover":!0,"prevNextButtons":!1,"contain":!0,"adaptiveHeight":!0,"dragThreshold":10,"percentPosition":!0,"pageDots":!1,"rightToLeft":!1,"draggable":!0,"selectedAttraction":0.1,"parallax":0,"friction":0.6,"groupCells":"100%"})});function closeBannerBottom(){document.querySelector(".banners-bottom").style.display="none";document.getElementById("open-banner-bottom").style.display="block"}
+function openBannerBottom(){document.querySelector(".banners-bottom").style.display="block";document.getElementById("open-banner-bottom").style.display="none"}
+;
