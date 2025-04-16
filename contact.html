@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form liên hệ</title>
+    <style>
+        form {
+            max-width: 400px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        input,
+        select,
+        textarea,
+        button {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0b7dda;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form id="contactForm">
+        <input type="text" name="name" placeholder="Họ tên" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="text" name="phone" placeholder="Số điện thoại" required />
+
+        <select name="service" required>
+            <option disabled selected value="">Chọn dịch vụ</option>
+            <option value="web">Thiết kế website</option>
+            <option value="seo">Dịch vụ SEO</option>
+            <option value="ads">Quảng cáo Google/Facebook</option>
+        </select>
+
+        <textarea name="message" placeholder="Nội dung tin nhắn" required></textarea>
+
+        <button type="submit">Gửi</button>
+    </form>
+
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const formData = {
+                name: form.name.value,
+                email: form.email.value,
+                phone: form.phone.value,
+                service: form.service.value,
+                message: form.message.value
+            };
+
+            try {
+                const response = await fetch("https://script.google.com/macros/s/AKfycbxbjlTqjLb8vHMD4Fxtrn8ejk3TQQAoV7UL3bglQ1ISVaOmuZVslgwOhjTb3XUKcZCo/exec", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+                if (result.result === "success") {
+                    alert("Gửi thành công!");
+                    form.reset();
+                } else {
+                    alert("Lỗi khi gửi. Vui lòng thử lại.");
+                }
+            } catch (error) {
+                alert("Gửi thất bại (CORS hoặc lỗi mạng): " + error.message);
+            }
+        });
+    </script>
+
+</body>
+
+</html>
